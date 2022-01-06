@@ -72,7 +72,7 @@ jobs:
                 uses: fifsky/ssh-action@master
                 with:
                     command: |
-                        cp ~/.secret/settings.php /var/www/
+                        cp ~/.secret/settings.php /var/www/settings.php
                     host: 54.221.185.84
                     user: ubuntu
                     key: ${{ secrets.SERVER_KEY }}
