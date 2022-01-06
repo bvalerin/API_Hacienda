@@ -79,3 +79,15 @@ jobs:
                     remote_user: ubuntu
                     remote_key: ${{ secrets.SERVER_KEY }}
                     
+            -   name: Copy config file
+                uses: fifsky/ssh-action@master
+                with:
+                    command: |
+                        cp ~/.secret/settings.php /var/www/
+                    host: 54.221.185.84
+                    user: ubuntu
+                    key: ${{ secrets.SERVER_KEY }}
+                
+                
+                
+                    
