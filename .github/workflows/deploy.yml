@@ -1,0 +1,67 @@
+name: Deploy
+on:
+    push:
+        branches:
+            - master
+jobs:
+    build:
+        name: Prepare environment, build and deploy
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Set Permissions
+                uses: fifsky/ssh-action@master
+                with:
+                    command: |
+                        sudo chown $USER:www-data -R /var/www/html
+                    host: 54.221.185.84
+                    user: ubuntu
+                    key: ${{ secrets.SERVER_KEY }}
+
+            -   name: Clone the repository
+                uses: actions/checkout@master
+                
+            -   name: Install PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: '8.0'
+
+            # -   name: Check current folder
+            #     run: pwd
+            
+            # -   name: List current folders
+            #     run: ls
+                
+            # -   name: Create build folder
+            #     run: mkdir /home/runner/work/API_Hacienda/API_Hacienda/build
+                 
+            # -   name: Check current folder
+            #     run: pwd
+
+            # -   name: Copy app folder to the new build
+            #     run: cp -r app /home/runner/work/API_Hacienda/API_Hacienda/build
+                
+            # -   name: Copy bootstrap folder to the new build
+            #     run: cp -r bootstrap /home/runner/work/API_Hacienda/API_Hacienda/build
+
+            -   name: Deploy www folder
+                uses: burnett01/rsync-deployments@5.1
+                with:
+                    switches: -avzr --delete --verbose
+                    path: ./www
+                    remote_path: /var/www/html
+                    remote_host: 54.221.185.84
+                    remote_port: 22
+                    remote_user: ubuntu
+                    remote_key: ${{ secrets.SERVER_KEY }}
+
+            -   name: Deploy api folder
+                uses: burnett01/rsync-deployments@5.1
+                with:
+                    switches: -avzr --delete --verbose
+                    path: ./api
+                    remote_path: /var/www/html
+                    remote_host: 54.221.185.84
+                    remote_port: 22
+                    remote_user: ubuntu
+                    remote_key: ${{ secrets.SERVER_KEY }}
+                    
