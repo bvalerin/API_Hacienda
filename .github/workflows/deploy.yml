@@ -45,11 +45,22 @@ jobs:
             # -   name: Copy bootstrap folder to the new build
             #     run: cp -r bootstrap /home/runner/work/API_Hacienda/API_Hacienda/build
 
-            -   name: Deploy api file
+            -   name: Deploy api.php file
                 uses: burnett01/rsync-deployments@5.1
                 with:
                     switches: -avzr --delete --verbose
                     path: ./www/api.php
+                    remote_path: /var/www/html
+                    remote_host: 54.221.185.84
+                    remote_port: 22
+                    remote_user: ubuntu
+                    remote_key: ${{ secrets.SERVER_KEY }}
+
+            -   name: Deploy index.php file
+                uses: burnett01/rsync-deployments@5.1
+                with:
+                    switches: -avzr --delete --verbose
+                    path: ./www/index.php
                     remote_path: /var/www/html
                     remote_host: 54.221.185.84
                     remote_port: 22
