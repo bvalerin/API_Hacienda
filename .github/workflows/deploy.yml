@@ -8,22 +8,22 @@ jobs:
         name: Prepare environment, build and deploy
         runs-on: ubuntu-latest
         steps:
-            -   name: Set Permissions
-                uses: fifsky/ssh-action@master
-                with:
-                    command: |
-                        sudo chown $USER:www-data -R /var/www/html
-                    host: 54.221.185.84
-                    user: ubuntu
-                    key: ${{ secrets.SERVER_KEY }}
+#             -   name: Set Permissions
+#                 uses: fifsky/ssh-action@master
+#                 with:
+#                     command: |
+#                         sudo chown $USER:www-data -R /var/www/html
+#                     host: 54.221.185.84
+#                     user: ubuntu
+#                     key: ${{ secrets.SERVER_KEY }}
 
             -   name: Clone the repository
                 uses: actions/checkout@master
                 
-            -   name: Install PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '8.0'
+#             -   name: Install PHP
+#                 uses: shivammathur/setup-php@v2
+#                 with:
+#                     php-version: '8.0'
 
 #             -   name: Create build folder
 #                 run: mkdir /home/runner/work/API_Hacienda/API_Hacienda/
