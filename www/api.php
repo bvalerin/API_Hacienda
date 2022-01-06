@@ -27,7 +27,7 @@ ini_set("display_errors", 1);
 date_default_timezone_set("America/Costa_Rica");
 
 if (file_exists("settings.php"))
-    include_once("settings.php");
+    include_once("../www/settings.php");
 else
 {
     echo "No se ha encontrado el archivo de configuración. Ve a la carpeta \"www\", renombra el archivo \"settings.php.dist\" a \"settings.php\" y ajusta los valores de configuración.";
